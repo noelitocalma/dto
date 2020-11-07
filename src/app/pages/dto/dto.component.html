@@ -1,0 +1,48 @@
+<div class="main-content">
+  <section>
+    <div>
+      <img src="assets/images/logo.svg" alt="">
+    </div>
+
+    <form [formGroup]="formGroup" (ngSubmit)="createDto()">
+      <div [class.has-error]="formGroup.controls.cardHolder.errors && formGroup.controls.cardHolder.touched">
+        <p>Card Holder</p>
+        <input type="text" placeholder="Enter Card Holder" name="cardHolder" formControlName="cardHolder">
+        <small class="error-message" *ngIf="formGroup.controls.cardHolder.errors && formGroup.controls.cardHolder.touched">Card Holder is a required field</small>
+      </div>
+
+      <div [class.has-error]="formGroup.controls.creditCardNumber.errors && formGroup.controls.creditCardNumber.touched">
+        <p>Credit Card Number</p>
+        <input type="text" placeholder="Enter Credit Card Number" name="creditCardNumber" formControlName="creditCardNumber">
+        <small class="error-message" *ngIf="formGroup.controls.creditCardNumber.errors && formGroup.controls.creditCardNumber.touched">Credit Card Number is a required field</small>
+      </div>
+
+      <div [class.has-error]="formGroup.hasError('expirationDate') && formGroup.controls.expirationDate.touched">
+        <p>Expiration Date</p>
+        <input type="date" placeholder="Select Expiration Date" name="expirationDate" formControlName="expirationDate">
+        <small class="error-message" *ngIf="formGroup.hasError('expirationDate') && formGroup.controls.expirationDate.touched">
+          {{ formGroup.errors['expirationDate'] }}
+        </small>
+      </div>
+
+      <div [class.has-error]="formGroup.controls.securityCode.errors && formGroup.controls.securityCode.touched">
+        <p>Security Code</p>
+        <input type="text" placeholder="Enter Security Code" name="securityCode" maxlength="3" minlength="3" formControlName="securityCode">
+        <small class="error-message" *ngIf="formGroup.controls.securityCode.errors && formGroup.controls.securityCode.touched">Please enter 3 digits.</small>
+      </div>
+
+      <div [class.has-error]="formGroup.controls.amount.errors && formGroup.controls.amount.touched">
+        <p>Amount</p>
+        <input type="number" placeholder="Enter Amount" name="amount" min="1" formControlName="amount">
+        <small class="error-message" *ngIf="formGroup.hasError('amount') && formGroup.controls.amount.touched">
+          {{ formGroup.errors['amount'] }}
+        </small>
+      </div>
+
+      <button type="submit" [disabled]="!formGroup.valid || loading.saving">
+        {{ loading.saving ? 'Please wait' : 'Submit' }}
+      </button>
+    </form>
+
+  </section>
+</div>
